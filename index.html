@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SeatBites — Fast Food Delivered to Your Seat</title>
+  <meta name="description" content="Scan your seat NFC tag or QR code and order delicious fast food delivered directly to your chair. Zero app install required.">
+  <meta name="theme-color" content="#FF5722">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%3E<text y=%2226%22 font-size=%2226%22>🍔</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- QRCode generation library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <div class="brand-icon">🍔</div>
+        <div class="brand-text">
+          <span class="brand-title">SeatBites</span>
+          <span class="brand-tagline">Direct Seat Delivery • Web App</span>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <!-- Quick Seat Location Pill -->
+        <button class="seat-pill" id="navSeatPill" onclick="openScannerModal()" title="View or change seat">
+          <span class="pulse-dot"></span>
+          <span class="seat-pill-icon">📍</span>
+          <span class="seat-pill-label" id="navSeatLabel">Cinema Hall 4 • Seat 14</span>
+          <span class="seat-pill-edit">Change</span>
+        </button>
+
+        <!-- Orders History -->
+        <button class="icon-btn" id="historyBtn" onclick="openOrdersModal()" title="View order history">
+          <span class="btn-icon">🧾</span>
+          <span class="badge" id="ordersBadge" style="display: none;">0</span>
+        </button>
+
+        <!-- Cart Button -->
+        <button class="cart-btn" id="cartBtn" onclick="openCartDrawer()" title="View Cart">
+          <span class="cart-icon">🛍️</span>
+          <span class="cart-text">Cart</span>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="main-content">
+
+    <!-- Active Seat Banner -->
+    <section class="seat-hero-card" id="seatHeroCard">
+      <div class="seat-hero-inner">
+        <div class="seat-hero-badge" id="seatHeroBadge">
+          <span class="badge-dot"></span>
+          <span id="seatHeroMethod">NFC TAG VERIFIED</span>
+        </div>
+        <div class="seat-hero-content">
+          <div class="seat-hero-left">
+            <div class="seat-avatar" id="seatAvatarIcon">📡</div>
+            <div class="seat-details">
+              <span class="seat-room" id="seatHeroRoom">Cinema Hall 4 (IMAX)</span>
+              <div class="seat-main-row">
+                <span class="seat-row" id="seatHeroRow">Row F</span>
+                <span class="seat-divider">•</span>
+                <span class="seat-num" id="seatHeroNum">Seat 14</span>
+              </div>
+            </div>
+          </div>
+          <div class="seat-hero-right">
+            <button class="btn btn-secondary-glass" onclick="openScannerModal()">
+              <span>🔄</span> Scan Another Seat
+            </button>
+          </div>
+        </div>
+        <div class="seat-delivery-notice">
+          <span>⚡</span>
+          <span>Zero app download required. Food will be brought by runner straight to this seat.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search & Scanner Quick Trigger -->
+    <section class="search-section">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search gourmet burgers, pizzas, wings, tacos, shakes..." oninput="handleSearch(this.value)">
+        <button class="clear-search-btn" id="clearSearchBtn" onclick="clearSearch()" style="display: none;">✕</button>
+      </div>
+      <button class="scan-trigger-btn" onclick="openScannerModal()" title="Scan Seat via NFC or QR">
+        <span class="scan-icon">📷</span>
+        <span class="scan-text">Scan Seat</span>
+      </button>
+    </section>
+
+    <!-- Promo Highlights Banner Carousel -->
+    <section class="promo-banner">
+      <div class="promo-content">
+        <div class="promo-tag">LIMITED SPECIAL</div>
+        <h2>Enjoy the Show & Dine at Your Seat</h2>
+        <p>Get <strong>50% OFF</strong> your first seat delivery with code <strong>SEAT50</strong>. Free table-side service!</p>
+      </div>
+      <div class="promo-emojis">🍿🍕🍔</div>
+    </section>
+
+    <!-- Food Category Navigation Tabs -->
+    <section class="categories-bar">
+      <div class="categories-scroll" id="categoryTabs">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- Food Menu Section -->
+    <section class="menu-section">
+      <div class="section-header">
+        <h2 id="sectionTitle">All Fast Food Items</h2>
+        <span class="items-count" id="itemsCount">24 items</span>
+      </div>
+
+      <div class="food-grid" id="foodGrid">
+        <!-- Food item cards generated by JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Bottom Cart Bar (Shows when items in cart) -->
+  <aside class="sticky-cart-bar" id="stickyCartBar" style="display: none;">
+    <div class="sticky-cart-container">
+      <div class="sticky-cart-info">
+        <div class="sticky-cart-qty" id="stickyCartQty">2 items</div>
+        <div class="sticky-cart-price" id="stickyCartPrice">$21.98</div>
+        <div class="sticky-cart-seat" id="stickyCartSeat">To Seat: Row F • Seat 14</div>
+      </div>
+      <button class="btn btn-primary" onclick="openCartDrawer()">
+        <span>View Order</span>
+        <span class="arrow-icon">→</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MODAL: Scan Seat (NFC / QR / Manual / Tag Preview) -->
+  <div class="modal-backdrop" id="scannerModal">
+    <div class="modal-card scanner-modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h3>Identify Your Seat</h3>
+          <p>Scan the seat NFC sticker or QR code on your armrest</p>
+        </div>
+        <button class="close-modal-btn" onclick="closeScannerModal()">✕</button>
+      </div>
+
+      <!-- Scanner Tabs -->
+      <div class="tab-header">
+        <button class="tab-btn active" onclick="switchScanTab('nfc')">📡 NFC Tap</button>
+        <button class="tab-btn" onclick="switchScanTab('qr')">📷 QR Scanner</button>
+        <button class="tab-btn" onclick="switchScanTab('manual')">✍️ Manual</button>
+        <button class="tab-btn" onclick="switchScanTab('generator')">🏷️ Tag Preview</button>
+      </div>
+
+      <!-- Tab Content: NFC -->
+      <div class="tab-pane active" id="tabPaneNfc">
+        <div class="nfc-view">
+          <div class="nfc-radar-pulse">
+            <div class="radar-circle c3"></div>
+            <div class="radar-circle c2"></div>
+            <div class="radar-circle c1"></div>
+            <div class="nfc-core-icon">📡</div>
+          </div>
+          <h4>Hold Device Near Seat NFC Tag</h4>
+          <p class="nfc-instruction">
+            Touch your phone to the circular sticker on your armrest or table.
+            <br><small id="nfcSupportText">Checking Web NFC sensor support...</small>
+          </p>
+          <button class="btn btn-primary" id="webNfcStartBtn" onclick="initiateWebNfc()">
+            <span>📶</span> Activate Phone NFC Reader
+          </button>
+
+          <div class="preset-section">
+            <div class="preset-heading">OR TAP TO SIMULATE REAL SEAT TAGS:</div>
+            <div class="presets-list" id="nfcPresetsList">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content: QR Code Scanner -->
+      <div class="tab-pane" id="tabPaneQr">
+        <div class="qr-view">
+          <div class="camera-viewfinder" id="cameraViewfinder">
+            <video id="qrVideo" playsinline autoplay muted style="display: none;"></video>
+            <div class="scanner-reticle">
+              <div class="corner-bracket top-left"></div>
+              <div class="corner-bracket top-right"></div>
+              <div class="corner-bracket bottom-left"></div>
+              <div class="corner-bracket bottom-right"></div>
+              <div class="laser-sweep"></div>
+            </div>
+            <div class="camera-status" id="cameraStatusText">Point camera at the seat QR code</div>
+          </div>
+
+          <div class="camera-controls">
+            <button class="btn btn-secondary" id="startCamBtn" onclick="toggleCameraScanner()">
+              <span>📸</span> Open Live Camera
+            </button>
+          </div>
+
+          <p class="qr-note">
+            The QR code contains the exact same seat information as the NFC sticker so both work interchangeably!
+          </p>
+
+          <div class="preset-section">
+            <div class="preset-heading">QUICK TEST: SCAN PRESET SEAT QR CODES:</div>
+            <div class="presets-list" id="qrPresetsList">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content: Manual -->
+      <div class="tab-pane" id="tabPaneManual">
+        <form class="manual-seat-form" onsubmit="handleManualSeatSubmit(event)">
+          <div class="form-group">
+            <label>Room / Hall / Theater</label>
+            <input type="text" id="manualRoom" placeholder="e.g. Cinema Screen 4 (IMAX), VIP Lounge" required value="Cinema Hall 4 (IMAX)">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Row / Table / Section</label>
+              <input type="text" id="manualRow" placeholder="e.g. Row F, Table 12" required value="Row F">
+            </div>
+            <div class="form-group">
+              <label>Seat Number</label>
+              <input type="text" id="manualSeat" placeholder="e.g. Seat 14" required value="Seat 14">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            <span>✅</span> Confirm Seat Location
+          </button>
+        </form>
+      </div>
+
+      <!-- Tab Content: Tag Preview & Generator -->
+      <div class="tab-pane" id="tabPaneGenerator">
+        <div class="generator-view">
+          <p class="gen-subtitle">
+            This QR code and NFC tag carry the exact same unified payload. Test scanning it with any phone camera!
+          </p>
+          <div class="qr-canvas-container">
+            <div id="qrCodeOutput"></div>
+            <div class="qr-tag-label" id="qrTagLabel">Cinema Hall 4 • Row F • Seat 14</div>
+          </div>
+
+          <div class="payload-box">
+            <label>Shared NFC NDEF & QR Data String:</label>
+            <code id="sharedPayloadCode">SEAT_TAG|room=Cinema Hall 4 (IMAX)|row=Row F|seat=Seat 14|sys=SeatBites</code>
+          </div>
+
+          <div class="payload-box url-box">
+            <label>Instant Tap Web URL (Write to NFC tag or print as QR):</label>
+            <code id="sharedUrlCode">https://seatbites.app/?room=Cinema%20Hall%204&row=Row%20F&seat=Seat%2014</code>
+            <button class="btn btn-small" onclick="copyTagUrl()">Copy Link</button>
+          </div>
+
+          <div class="form-row" style="margin-top: 14px;">
+            <input type="text" id="genRoomInput" placeholder="Room" value="Cinema Hall 4 (IMAX)" oninput="updateTagGenerator()">
+            <input type="text" id="genRowInput" placeholder="Row" value="Row F" oninput="updateTagGenerator()">
+            <input type="text" id="genSeatInput" placeholder="Seat" value="Seat 14" oninput="updateTagGenerator()">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL: Food Item Customization Sheet -->
+  <div class="modal-backdrop" id="foodModal">
+    <div class="modal-card food-modal-card">
+      <div class="modal-header">
+        <div class="food-modal-headline">
+          <span class="food-modal-emoji" id="modalFoodEmoji">🍔</span>
+          <div>
+            <h3 id="modalFoodName">Double Smash Bacon Cheddar</h3>
+            <div class="food-modal-meta">
+              <span id="modalFoodRating">⭐ 4.9 (340)</span> •
+              <span id="modalFoodPrep">⏱️ 8 mins</span> •
+              <span id="modalFoodCalories">820 kcal</span>
+            </div>
+          </div>
+        </div>
+        <button class="close-modal-btn" onclick="closeFoodModal()">✕</button>
+      </div>
+
+      <div class="food-modal-body">
+        <p class="food-modal-desc" id="modalFoodDesc">Description here...</p>
+
+        <!-- Size Options -->
+        <div class="custom-group" id="sizeOptionsGroup">
+          <label class="group-title">Choose Size</label>
+          <div class="radio-cards" id="sizeOptionsList">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Spice Heat Level -->
+        <div class="custom-group" id="spiceGroup">
+          <label class="group-title">Spice Heat Level 🔥</label>
+          <div class="pill-options" id="spiceOptionsList">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Add-ons & Extras -->
+        <div class="custom-group" id="addOnsGroup">
+          <label class="group-title">Add Extras & Toppings</label>
+          <div class="checkbox-cards" id="addOnsList">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Kitchen Note -->
+        <div class="custom-group">
+          <label class="group-title">Special Kitchen Instructions</label>
+          <textarea id="modalKitchenNote" placeholder="e.g. Extra sauce, no pickles, wrap tight..."></textarea>
+        </div>
+      </div>
+
+      <!-- Add to order footer -->
+      <div class="food-modal-footer">
+        <div class="qty-counter">
+          <button onclick="changeModalQty(-1)">-</button>
+          <span id="modalQtyDisplay">1</span>
+          <button onclick="changeModalQty(1)">+</button>
+        </div>
+        <button class="btn btn-primary btn-add-order" id="modalAddBtn" onclick="confirmAddToCart()">
+          Add to Seat Order • <span id="modalTotalPrice">$10.99</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DRAWER: Cart & Checkout -->
+  <div class="drawer-backdrop" id="cartDrawerBackdrop" onclick="closeCartDrawer(event)">
+    <div class="cart-drawer" id="cartDrawer">
+      <div class="drawer-header">
+        <div class="drawer-title-group">
+          <h3>Your Seat Order</h3>
+          <p id="drawerSeatText">Delivering to: Row F • Seat 14</p>
+        </div>
+        <button class="close-drawer-btn" onclick="closeCartDrawerDirect()">✕</button>
+      </div>
+
+      <!-- Scanned Seat Confirmation Callout -->
+      <div class="drawer-seat-alert" id="drawerSeatAlert">
+        <div class="alert-left">
+          <span class="alert-icon">📍</span>
+          <div>
+            <strong>Delivery Destination</strong>
+            <p id="drawerAlertSeatName">Cinema Hall 4 • Row F • Seat 14</p>
+          </div>
+        </div>
+        <button class="btn btn-small" onclick="openScannerModal()">Change</button>
+      </div>
+
+      <!-- Cart Items List -->
+      <div class="cart-items-container" id="cartItemsList">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Promo Code Section -->
+      <div class="drawer-section promo-section">
+        <div class="promo-input-row" id="promoInputRow">
+          <input type="text" id="promoInput" placeholder="Promo code (Try: SEAT50 or FREEDROP)">
+          <button class="btn btn-secondary" onclick="applyPromoCode()">Apply</button>
+        </div>
+        <div class="applied-promo" id="appliedPromoBadge" style="display: none;">
+          <span>🎉 Promo <strong>SEAT50</strong> Applied (-$5.00)</span>
+          <button class="remove-promo-btn" onclick="removePromoCode()">✕</button>
+        </div>
+      </div>
+
+      <!-- Tip Runner Section -->
+      <div class="drawer-section">
+        <label class="group-title">Tip Your Seat Runner 🏃</label>
+        <div class="tip-options" id="tipOptions">
+          <button class="tip-pill" onclick="selectTip(0)">None</button>
+          <button class="tip-pill" onclick="selectTip(1)">$1.00</button>
+          <button class="tip-pill active" onclick="selectTip(2)">$2.00</button>
+          <button class="tip-pill" onclick="selectTip(3)">$3.00</button>
+          <button class="tip-pill" onclick="selectTip(5)">$5.00</button>
+        </div>
+      </div>
+
+      <!-- Payment Method -->
+      <div class="drawer-section">
+        <label class="group-title">Payment Method</label>
+        <select id="paymentSelect" class="styled-select">
+          <option value="Apple Pay / Google Pay">Apple Pay / Google Pay</option>
+          <option value="Credit Card (•••• 4921)">Credit Card (•••• 4921)</option>
+          <option value="Seat Reservation Tab">Room / Seat Reservation Tab</option>
+          <option value="Cash to Runner">Cash upon Seat Delivery</option>
+        </select>
+      </div>
+
+      <!-- Summary Pricing -->
+      <div class="bill-summary">
+        <div class="bill-row">
+          <span>Items Subtotal</span>
+          <span id="billSubtotal">$0.00</span>
+        </div>
+        <div class="bill-row green">
+          <span>Seat Drop Delivery</span>
+          <span>FREE ($0.00)</span>
+        </div>
+        <div class="bill-row">
+          <span>Estimated Tax</span>
+          <span id="billTax">$0.00</span>
+        </div>
+        <div class="bill-row" id="billTipRow">
+          <span>Runner Tip</span>
+          <span id="billTip">$2.00</span>
+        </div>
+        <div class="bill-row green" id="billDiscountRow" style="display: none;">
+          <span>Promo Discount</span>
+          <span id="billDiscount">-$0.00</span>
+        </div>
+        <div class="bill-row total">
+          <span>Total to Pay</span>
+          <span id="billTotal">$0.00</span>
+        </div>
+      </div>
+
+      <!-- Checkout Button -->
+      <div class="drawer-footer">
+        <button class="btn btn-primary btn-block checkout-btn" id="checkoutBtn" onclick="placeOrder()">
+          <span>⚡ Send Order to My Seat</span>
+          <span id="checkoutPriceLabel">$0.00</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Live Order Tracker -->
+  <div class="modal-backdrop" id="trackerModal">
+    <div class="modal-card tracker-modal-card">
+      <div class="modal-header">
+        <div>
+          <h3 id="trackerOrderId">Order #ORD-78192</h3>
+          <p id="trackerSeatSub">Delivering to: Row F • Seat 14</p>
+        </div>
+        <div class="tracker-header-actions">
+          <button class="btn btn-small btn-primary" onclick="advanceOrderStatus()">
+            ⏩ Next Kitchen Step
+          </button>
+          <button class="close-modal-btn" onclick="closeTrackerModal()">✕</button>
+        </div>
+      </div>
+
+      <div class="tracker-body">
+        <!-- Live Status Card -->
+        <div class="tracker-status-banner" id="trackerStatusBanner">
+          <div class="banner-top">
+            <span class="live-pill">🔴 LIVE SEAT DELIVERY</span>
+            <span class="eta-pill" id="trackerEtaText">ETA: ~10 mins</span>
+          </div>
+          <h2 id="trackerStatusTitle">Cooking & Packing Fresh</h2>
+          <p id="trackerStatusDesc">Chefs are grilling your patties & frying crisp sides.</p>
+          <div class="tracker-progress-track">
+            <div class="tracker-progress-bar" id="trackerProgressBar" style="width: 45%;"></div>
+          </div>
+        </div>
+
+        <!-- Destination & PIN -->
+        <div class="tracker-destination-card">
+          <div class="dest-info">
+            <span class="dest-icon">📍</span>
+            <div>
+              <strong id="trackerDestRoom">Cinema Hall 4 (IMAX)</strong>
+              <div class="dest-exact" id="trackerDestExact">Row F • Seat 14</div>
+            </div>
+          </div>
+          <div class="handover-pin">
+            <small>HANDOVER PIN</small>
+            <span id="trackerPinCode">4821</span>
+          </div>
+        </div>
+
+        <!-- Runner Card -->
+        <div class="runner-card">
+          <div class="runner-avatar">🏃‍♂️</div>
+          <div class="runner-details">
+            <div class="runner-name">Carlos Ruiz</div>
+            <div class="runner-role">VIP Seat Expediter • ⭐ 4.96</div>
+          </div>
+          <button class="btn btn-small btn-secondary" onclick="alert('Connecting message to Runner Carlos: He is on his way!')">
+            💬 Message
+          </button>
+        </div>
+
+        <!-- Timeline Steps -->
+        <div class="timeline-container" id="trackerTimeline">
+          <!-- Timeline steps rendered by JS -->
+        </div>
+
+        <!-- Order Items Detail -->
+        <div class="tracker-items-summary" id="trackerItemsSummary">
+          <!-- Items summary -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Order History -->
+  <div class="modal-backdrop" id="ordersModal">
+    <div class="modal-card orders-modal-card">
+      <div class="modal-header">
+        <h3>My Seat Orders</h3>
+        <button class="close-modal-btn" onclick="closeOrdersModal()">✕</button>
+      </div>
+      <div class="orders-list-body" id="ordersListBody">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
