@@ -91,7 +91,7 @@
     <section class="search-section">
       <div class="search-box">
         <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="Search gourmet burgers, pizzas, wings, tacos, shakes..." oninput="handleSearch(this.value)">
+        <input type="text" id="searchInput" placeholder="Search samosa, chaat, vada pav, rolls, paneer, chai..." oninput="handleSearch(this.value)">
         <button class="clear-search-btn" id="clearSearchBtn" onclick="clearSearch()" style="display: none;">✕</button>
       </div>
       <button class="scan-trigger-btn" onclick="openScannerModal()" title="Scan Seat via NFC or QR">
@@ -393,10 +393,10 @@
         <label class="group-title">Tip Your Seat Runner 🏃</label>
         <div class="tip-options" id="tipOptions">
           <button class="tip-pill" onclick="selectTip(0)">None</button>
-          <button class="tip-pill" onclick="selectTip(1)">$1.00</button>
-          <button class="tip-pill active" onclick="selectTip(2)">$2.00</button>
-          <button class="tip-pill" onclick="selectTip(3)">$3.00</button>
-          <button class="tip-pill" onclick="selectTip(5)">$5.00</button>
+          <button class="tip-pill" onclick="selectTip(10)">₹10</button>
+          <button class="tip-pill active" onclick="selectTip(20)">₹20</button>
+          <button class="tip-pill" onclick="selectTip(30)">₹30</button>
+          <button class="tip-pill" onclick="selectTip(50)">₹50</button>
         </div>
       </div>
 
@@ -404,10 +404,10 @@
       <div class="drawer-section">
         <label class="group-title">Payment Method</label>
         <select id="paymentSelect" class="styled-select">
-          <option value="Apple Pay / Google Pay">Apple Pay / Google Pay</option>
-          <option value="Credit Card (•••• 4921)">Credit Card (•••• 4921)</option>
+          <option value="UPI (GPay / PhonePe / Paytm)">UPI (GPay / PhonePe / Paytm)</option>
+          <option value="Credit / Debit Card">Credit / Debit Card</option>
           <option value="Seat Reservation Tab">Room / Seat Reservation Tab</option>
-          <option value="Cash to Runner">Cash upon Seat Delivery</option>
+          <option value="Cash on Delivery to Seat">Cash on Delivery to Seat</option>
         </select>
       </div>
 
@@ -415,27 +415,27 @@
       <div class="bill-summary">
         <div class="bill-row">
           <span>Items Subtotal</span>
-          <span id="billSubtotal">$0.00</span>
+          <span id="billSubtotal">₹0</span>
         </div>
         <div class="bill-row green">
           <span>Seat Drop Delivery</span>
-          <span>FREE ($0.00)</span>
+          <span>FREE (₹0)</span>
         </div>
         <div class="bill-row">
-          <span>Estimated Tax</span>
-          <span id="billTax">$0.00</span>
+          <span>GST (5%)</span>
+          <span id="billTax">₹0</span>
         </div>
         <div class="bill-row" id="billTipRow">
           <span>Runner Tip</span>
-          <span id="billTip">$2.00</span>
+          <span id="billTip">₹20</span>
         </div>
         <div class="bill-row green" id="billDiscountRow" style="display: none;">
           <span>Promo Discount</span>
-          <span id="billDiscount">-$0.00</span>
+          <span id="billDiscount">-₹0</span>
         </div>
         <div class="bill-row total">
           <span>Total to Pay</span>
-          <span id="billTotal">$0.00</span>
+          <span id="billTotal">₹0</span>
         </div>
       </div>
 

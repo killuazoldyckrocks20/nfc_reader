@@ -1,454 +1,540 @@
-// ================= DATA MODELS & STATE =================
+// ================= DATA MODELS & STATE (INDIAN FAST FOOD & SNACKS IN INR ₹) =================
 
 const FOOD_MENU = [
-  // 🍔 BURGERS
+  // 🥟 CHATPATI CHAAT & DESI STREET SNACKS
+  {
+    id: 'ch1',
+    name: 'Dilli Wali Crispy Aloo Tikki Chaat',
+    category: 'chaat',
+    emoji: '🥟',
+    basePrice: 149,
+    calories: 420,
+    prepTime: 5,
+    rating: 4.9,
+    reviews: 580,
+    badges: ['Bestseller', 'Dilli Special', 'Veg 🌿'],
+    desc: 'Golden crisp shallow-fried spiced potato tikkis topped with warm spiced chole, chilled sweet dahi, tangy saunth tamarind chutney, spicy pudina chutney & crunchy sev.',
+    sizes: [
+      { name: 'Single Plate (2 Tikkis)', price: 0 },
+      { name: 'Hungry Box (3 Tikkis)', price: 50 }
+    ],
+    spiceLevels: ['Meethi Chutney More', 'Medium Chatpata', 'Teekha Desi Mirch 🔥'],
+    isSpicy: true,
+    addOns: [
+      { name: 'Extra Dahi & Chutneys', price: 25 },
+      { name: 'Extra Crunchy Sev & Papdi', price: 20 },
+      { name: 'Grated Beetroot & Pomegranate', price: 20 }
+    ]
+  },
+  {
+    id: 'ch2',
+    name: 'Mumbai Style Butter Pav Bhaji',
+    category: 'chaat',
+    emoji: '🥘',
+    basePrice: 199,
+    calories: 580,
+    prepTime: 7,
+    rating: 4.9,
+    reviews: 720,
+    badges: ['Bestseller', 'Amul Butter', 'Veg 🌿'],
+    desc: 'Slow-cooked mashed mixed vegetables cooked in aromatic spices on a giant tawa, drowning in a dollop of pure Amul butter. Served with 2 soft butter-toasted ladi pavs & lemon onions.',
+    sizes: [
+      { name: 'Regular (with 2 Pavs)', price: 0 },
+      { name: 'Double Cheese Pav Bhaji', price: 50 }
+    ],
+    spiceLevels: ['Medium Masala', 'Extra Teekha Tawa Heat 🔥'],
+    isSpicy: true,
+    addOns: [
+      { name: 'Extra Butter Ladi Pav (Pair)', price: 40 },
+      { name: 'Extra Block of Amul Butter', price: 30 },
+      { name: 'Amul Cheese Slice Topping', price: 35 }
+    ]
+  },
+  {
+    id: 'ch3',
+    name: 'Dahi Puri & Papdi Dhamaka (6 Pcs)',
+    category: 'chaat',
+    emoji: '🥙',
+    basePrice: 129,
+    calories: 360,
+    prepTime: 4,
+    rating: 4.8,
+    reviews: 430,
+    badges: ['Crowd Fav', 'Veg 🌿'],
+    desc: 'Crispy hollow puris filled with boiled potato-moong mix, whipped creamy sweet curd, roasted jeera, amchur tamarind chutney and generous mountain of nylon sev.',
+    sizes: [{ name: 'Standard 6 Pieces', price: 0 }],
+    spiceLevels: ['Khatta Meetha', 'Chatpata'],
+    isSpicy: false,
+    addOns: [{ name: 'Extra Sev & Boondi', price: 20 }]
+  },
+
+  // 🍔 DESI BURGERS & ROLLS
   {
     id: 'b1',
-    name: 'Double Smash Bacon Cheddar',
+    name: 'Butter Chicken Double Smash Burger',
     category: 'burgers',
     emoji: '🍔',
-    basePrice: 10.99,
-    calories: 820,
-    prepTime: 8,
+    basePrice: 249,
+    calories: 680,
+    prepTime: 9,
     rating: 4.9,
-    reviews: 342,
+    reviews: 640,
     badges: ['Bestseller', 'Chef Special'],
-    desc: 'Two 100% Angus beef smashed patties, applewood smoked bacon, sharp melted cheddar, caramelized onions & secret smash sauce on toasted brioche.',
+    desc: 'Juicy tandoori spiced grilled chicken patty smothered in rich creamy Delhi makhani gravy, pickled laccha onions, mint coriander mayo on buttered brioche bun.',
     sizes: [
-      { name: 'Regular Double', price: 0 },
-      { name: 'Hungry Triple (+1 Patty)', price: 3.00 }
+      { name: 'Single Patty', price: 0 },
+      { name: 'Double Monster Patty', price: 90 }
     ],
-    spiceLevels: ['Mild', 'Medium', 'Hot', 'Atomic Fire 🔥'],
+    spiceLevels: ['Makhani Mild', 'Spicy Tandoori 🔥'],
     isSpicy: false,
     addOns: [
-      { name: 'Extra Smoked Bacon', price: 1.75 },
-      { name: 'Fried Free-Range Egg', price: 1.25 },
-      { name: 'Truffle Mayo Dip', price: 0.95 },
-      { name: 'Extra Cheddar Slice', price: 0.80 }
+      { name: 'Extra Melted Cheddar Slice', price: 35 },
+      { name: 'Extra Makhani Dip Cup', price: 30 },
+      { name: 'Pickled Sirka Onions', price: 15 }
     ]
   },
   {
     id: 'b2',
-    name: 'Nashville Hot Crispy Chicken',
+    name: 'Crispy Paneer Makhani Supreme Burger',
     category: 'burgers',
-    emoji: '🍗',
-    basePrice: 9.99,
-    calories: 740,
-    prepTime: 10,
+    emoji: '🍔',
+    basePrice: 219,
+    calories: 620,
+    prepTime: 8,
     rating: 4.8,
-    reviews: 289,
-    badges: ['Spicy 🔥', 'Crowd Fav'],
-    desc: 'Double-breaded golden fried chicken thigh dipped in fiery Nashville cayenne chili oil, tangy slaw, house pickles & comeback sauce.',
+    reviews: 510,
+    badges: ['Veg Bestseller', 'Veg 🌿'],
+    desc: 'Thick hand-breaded crispy golden paneer block tossed in tandoori spices, crunchy cabbage slaw, rich butter makhani sauce & melted mozzarella cheese.',
     sizes: [
-      { name: 'Regular', price: 0 },
-      { name: 'Giant Breast Filet', price: 2.25 }
+      { name: 'Regular Crispy', price: 0 },
+      { name: 'Jumbo Size Paneer', price: 60 }
     ],
-    spiceLevels: ['Medium Kick', 'Hot', 'Xtra Hot 🔥', 'Reaper Inferno ☠️'],
+    spiceLevels: ['Medium', 'Spicy Chatpata 🔥'],
     isSpicy: true,
     addOns: [
-      { name: 'Pickled Jalapeños', price: 0.75 },
-      { name: 'Pepper Jack Cheese', price: 1.00 },
-      { name: 'Extra Crunchy Slaw', price: 0.60 }
+      { name: 'Extra Amul Cheese', price: 35 },
+      { name: 'Tandoori Mayo Dip', price: 25 }
     ]
   },
   {
     id: 'b3',
-    name: 'Truffle Swiss Mushroom Melt',
+    name: 'Mumbai Schezwan Vada Pav (2 Pcs)',
     category: 'burgers',
-    emoji: '🍄',
-    basePrice: 11.49,
-    calories: 790,
-    prepTime: 9,
-    rating: 4.7,
-    reviews: 178,
-    badges: ['Gourmet'],
-    desc: 'Flame-broiled beef patty, garlic butter cremini mushrooms, melted Swiss Emmental cheese, and decadent black truffle aioli.',
+    emoji: '🥔',
+    basePrice: 99,
+    calories: 440,
+    prepTime: 4,
+    rating: 4.9,
+    reviews: 890,
+    badges: ['Mumbai Icon', 'Super Hit', 'Veg 🌿'],
+    desc: 'Two spicy potato vadas fried crisp in gram flour batter, slathered in fiery dry garlic red chutney, fiery Schezwan sauce, green chilies in soft buttered pav.',
     sizes: [
-      { name: 'Regular', price: 0 },
-      { name: 'Double Stack', price: 3.50 }
+      { name: 'Classic Duo (2 Pcs)', price: 0 },
+      { name: 'Cheese Burst Vada Pav (2 Pcs)', price: 40 }
     ],
-    spiceLevels: ['Mild'],
-    isSpicy: false,
+    spiceLevels: ['Medium Garlic', 'Asli Mumbai Teekha 🔥', 'Kolhapuri Blast 🌋'],
+    isSpicy: true,
     addOns: [
-      { name: 'Caramelized Balsamic Onions', price: 1.10 },
-      { name: 'Crispy Fried Onion Strings', price: 0.90 }
+      { name: 'Extra Fried Salted Green Chilies (4 pcs)', price: 10 },
+      { name: 'Lahsuni Red Dry Chutney Cup', price: 15 }
     ]
   },
   {
     id: 'b4',
-    name: 'Spicy Volcano Jalapeño Burger',
+    name: 'Kolkata Kathi Chicken Tikka Roll',
     category: 'burgers',
-    emoji: '🌶️',
-    basePrice: 10.49,
-    calories: 810,
-    prepTime: 9,
-    rating: 4.8,
-    reviews: 215,
-    badges: ['Spicy 🔥'],
-    desc: 'Charbroiled Angus patty, pepper jack cheese, fire-roasted serranos, crispy tortilla strips, and smoky chipotle volcano drizzle.',
-    sizes: [{ name: 'Regular', price: 0 }],
-    spiceLevels: ['Hot 🔥', 'Volcano Fire 🌋'],
-    isSpicy: true,
-    addOns: [{ name: 'Melted Queso Splash', price: 1.50 }]
-  },
-  {
-    id: 'b5',
-    name: 'Avocado Green Goddess Vegan',
-    category: 'burgers',
-    emoji: '🥑',
-    basePrice: 9.75,
+    emoji: '🌯',
+    basePrice: 199,
     calories: 520,
     prepTime: 8,
-    rating: 4.6,
-    reviews: 142,
-    badges: ['Vegan 🌱', 'Healthy'],
-    desc: 'Golden black bean & quinoa crisp patty, sliced ripe Hass avocado, cilantro-lime vegan crema, heirloom tomato on artisan multigrain bun.',
-    sizes: [{ name: 'Regular', price: 0 }],
-    spiceLevels: ['Mild', 'Zesty'],
-    isSpicy: false,
-    addOns: [{ name: 'Extra Guacamole Scoop', price: 1.50 }]
+    rating: 4.8,
+    reviews: 410,
+    badges: ['Street Legend'],
+    desc: 'Flaky paratha coated with farm egg, rolled with smoky charcoal-grilled tandoori chicken tikka, lime-soaked sliced red onions, and green mint sauce.',
+    sizes: [
+      { name: 'Single Egg Chicken Roll', price: 0 },
+      { name: 'Double Egg Double Chicken Roll', price: 60 }
+    ],
+    spiceLevels: ['Medium Chaat Masala', 'Extra Green Chili Spiced 🔥'],
+    isSpicy: true,
+    addOns: [
+      { name: 'Cheese Melt Layer', price: 35 },
+      { name: 'Extra Egg Layer', price: 20 }
+    ]
   },
 
-  // 🍕 PIZZAS
+  // 🍕 DESI TADKA PIZZAS
   {
     id: 'p1',
-    name: 'Pepperoni Overload Detroit Style',
+    name: 'Paneer Tikka Desi Fusion Pizza',
     category: 'pizzas',
     emoji: '🍕',
-    basePrice: 13.99,
-    calories: 960,
-    prepTime: 14,
+    basePrice: 299,
+    calories: 780,
+    prepTime: 12,
     rating: 4.9,
-    reviews: 420,
-    badges: ['Bestseller', 'Hot Honey'],
-    desc: 'Thick square buttery crust with crispy caramelized cheddar edges, double cupping pepperoni, whipped ricotta dollops & spicy hot honey.',
+    reviews: 540,
+    badges: ['Bestseller', 'Veg 🌿'],
+    desc: 'Crispy hand-stretched crust brushed with spiced makhani sauce, topped with roasted tandoori paneer cubes, crunchy capsicum, red onions & 100% mozzarella.',
     sizes: [
-      { name: 'Personal 4-Corner', price: 0 },
-      { name: 'Shareable 8-Corner', price: 5.50 }
+      { name: 'Regular 8-inch', price: 0 },
+      { name: 'Medium 10-inch (Shareable)', price: 120 }
     ],
-    spiceLevels: ['Mild', 'Hot Honey Drizzle'],
-    isSpicy: false,
+    spiceLevels: ['Makhani Mild', 'Tandoori Hot 🔥'],
+    isSpicy: true,
     addOns: [
-      { name: 'Extra Hot Honey Cup', price: 1.25 },
-      { name: 'Garlic Butter Crust Dip', price: 0.85 }
+      { name: 'Extra Cheese Burst Crust', price: 60 },
+      { name: 'Extra Paneer Cubes', price: 45 },
+      { name: 'Mint Chutney Swirl', price: 20 }
     ]
   },
   {
     id: 'p2',
-    name: 'Smoky BBQ Pulled Chicken & Bacon',
+    name: 'Tandoori Chicken Fiesta Pizza',
     category: 'pizzas',
     emoji: '🍕',
-    basePrice: 13.49,
-    calories: 890,
-    prepTime: 13,
-    rating: 4.8,
-    reviews: 210,
-    badges: ['Smoky BBQ'],
-    desc: 'Sweet & smoky pit BBQ sauce, tender pulled chicken breast, crispy applewood bacon, red onion rings, smoked gouda & mozzarella.',
-    sizes: [{ name: 'Personal Square', price: 0 }],
-    spiceLevels: ['Sweet & Smoky'],
-    isSpicy: false,
-    addOns: [{ name: 'Ranch Crust Dip', price: 0.75 }]
+    basePrice: 349,
+    calories: 840,
+    prepTime: 12,
+    rating: 4.9,
+    reviews: 620,
+    badges: ['Crowd Fav', 'Meat Feast'],
+    desc: 'Oven-fired pizza with spicy makhani sauce, chunks of roasted tandoori chicken, chicken seekh kebab coins, sliced green chilies & bubbling cheese.',
+    sizes: [
+      { name: 'Regular 8-inch', price: 0 },
+      { name: 'Medium 10-inch (Shareable)', price: 140 }
+    ],
+    spiceLevels: ['Medium Masala', 'Fiery Desi Chili 🔥'],
+    isSpicy: true,
+    addOns: [
+      { name: 'Cheese Burst Crust', price: 65 },
+      { name: 'Extra Chicken Kebab Coins', price: 50 }
+    ]
   },
   {
     id: 'p3',
-    name: 'Classic Margherita Rustica',
+    name: 'Corn & Cheese Spicy Jalapeño Pizza',
     category: 'pizzas',
-    emoji: '🧀',
-    basePrice: 11.25,
-    calories: 680,
+    emoji: '🌽',
+    basePrice: 269,
+    calories: 710,
     prepTime: 11,
     rating: 4.7,
-    reviews: 165,
-    badges: ['Vegetarian 🌿'],
-    desc: 'Crushed San Marzano tomatoes, fior di latte mozzarella, whole fresh basil leaves, extra virgin cold-pressed olive oil & sea salt.',
-    sizes: [{ name: 'Personal', price: 0 }],
-    spiceLevels: ['Classic'],
+    reviews: 320,
+    badges: ['Kids & Family', 'Veg 🌿'],
+    desc: 'Sweet American golden corn, fiery pickled jalapeños, diced red paprika, oregano seasoning and generous gooey mozzarella cheese.',
+    sizes: [{ name: 'Regular 8-inch', price: 0 }],
+    spiceLevels: ['Mild Sweet Corn', 'Spicy Jalapeño'],
     isSpicy: false,
-    addOns: [{ name: 'Fresh Burrata Ball', price: 2.75 }]
+    addOns: [{ name: 'Extra Mozzarella', price: 50 }]
   },
 
-  // 🍗 FRIED CHICKEN
+  // 🍗 TANDOORI & CRISPY CHICKEN
   {
     id: 'c1',
-    name: 'Mega Crunch Chicken Tenders (6 Pcs)',
+    name: 'Masala Fried Chicken Strips (6 Pcs)',
     category: 'chicken',
     emoji: '🍗',
-    basePrice: 8.99,
-    calories: 620,
-    prepTime: 7,
+    basePrice: 199,
+    calories: 540,
+    prepTime: 6,
     rating: 4.9,
-    reviews: 512,
-    badges: ['Bestseller', 'Kids Fav'],
-    desc: 'Buttermilk-brined hand-breaded crispy golden chicken breast tenders seasoned with 12 spices. Served with 2 dipping sauces.',
+    reviews: 680,
+    badges: ['Bestseller', 'Super Crunchy'],
+    desc: 'Hand-breaded crunchy chicken tenders tossed in peri-peri and chaat masala seasonings. Served with tandoori mayo and pudina dip.',
     sizes: [
-      { name: '6 Tenders', price: 0 },
-      { name: '10 Tenders (Hungry Box)', price: 4.50 }
+      { name: '6 Pcs Strips', price: 0 },
+      { name: '10 Pcs Mega Bucket', price: 110 }
     ],
-    spiceLevels: ['Crispy Original', 'Spicy Nashville'],
-    isSpicy: false,
+    spiceLevels: ['Desi Peri-Peri', 'Gunpowder Masala 🔥'],
+    isSpicy: true,
     addOns: [
-      { name: 'Signature SeatBites Sauce', price: 0.75 },
-      { name: 'Creamy Garlic Ranch', price: 0.75 },
-      { name: 'Sweet Bourbon Mustard', price: 0.75 }
+      { name: 'Tandoori Mayo Dip', price: 25 },
+      { name: 'Garlic Mayo Dip', price: 25 }
     ]
   },
   {
     id: 'c2',
-    name: 'Korean Sweet Chili Glazed Wings (8 Pcs)',
+    name: 'Chicken Seekh Kebabs on Skewers (4 Pcs)',
     category: 'chicken',
-    emoji: '🍗',
-    basePrice: 11.25,
-    calories: 780,
-    prepTime: 11,
+    emoji: '🍢',
+    basePrice: 229,
+    calories: 490,
+    prepTime: 9,
     rating: 4.8,
-    reviews: 310,
-    badges: ['Korean Crunch', 'Glazed'],
-    desc: 'Ultra crunchy double-fried jumbo chicken wings tossed in sticky gochujang sweet-spicy glaze with toasted sesame and green scallions.',
-    sizes: [
-      { name: '8 Wings', price: 0 },
-      { name: '16 Wings Party Pack', price: 9.00 }
-    ],
-    spiceLevels: ['Sweet Heat 🔥', 'Extreme Fire 🌋'],
-    isSpicy: true,
-    addOns: [{ name: 'Pickled Daikon Radish', price: 1.00 }]
-  },
-
-  // 🌮 TACOS & NACHOS
-  {
-    id: 't1',
-    name: 'Slow-Cooked Birria Beef Tacos (3 Pcs)',
-    category: 'tacos',
-    emoji: '🌮',
-    basePrice: 11.99,
-    calories: 820,
-    prepTime: 10,
-    rating: 4.9,
-    reviews: 460,
-    badges: ['Bestseller', 'Consommé Dip'],
-    desc: 'Crispy grilled corn tortillas soaked in chili consommé broth, loaded with 12-hour braised beef, melted Oaxaca cheese, onions & cilantro.',
-    sizes: [{ name: '3 Tacos + Dip Broth', price: 0 }],
-    spiceLevels: ['Medium Zesty', 'Hot Diablo'],
-    isSpicy: true,
-    addOns: [{ name: 'Extra Cup of Consommé', price: 1.50 }]
-  },
-  {
-    id: 't2',
-    name: 'Cinema Loaded Stadium Nachos',
-    category: 'tacos',
-    emoji: '🧀',
-    basePrice: 9.49,
-    calories: 880,
-    prepTime: 6,
-    rating: 4.8,
-    reviews: 388,
-    badges: ['Movie Night Fav', 'Shareable'],
-    desc: 'Warm stone-ground tortilla chips smothered in warm velvety queso blanco, fresh pico de gallo, black beans, guacamole & jalapeño slices.',
-    sizes: [{ name: 'Standard Tray', price: 0 }],
-    spiceLevels: ['Mild', 'Jalapeño Kick'],
+    reviews: 370,
+    badges: ['Mughlai Classic'],
+    desc: 'Minced chicken blended with ginger, garlic, roasted spices, and cilantro, roasted over coals. Served with laccha onion and mint yogurt chutney.',
+    sizes: [{ name: '4 Long Kebabs', price: 0 }],
+    spiceLevels: ['Juicy Mild', 'Spicy Tandoori'],
     isSpicy: false,
-    addOns: [
-      { name: 'Add Seasoned Angus Beef', price: 2.25 },
-      { name: 'Add Pulled Chicken', price: 2.00 },
-      { name: 'Extra Guacamole Scoop', price: 1.50 }
-    ]
+    addOns: [{ name: 'Butter Rumali Roti (2 pcs)', price: 40 }]
   },
 
-  // 🍟 LOADED SIDES
+  // 🍟 LOADED FRIES & CRISPY MUNCHIES
   {
     id: 's1',
-    name: 'Loaded Bacon Cheddar Animal Fries',
+    name: 'Peri-Peri Crinkle Fries with Cheese Dip',
     category: 'sides',
     emoji: '🍟',
-    basePrice: 6.99,
-    calories: 690,
-    prepTime: 5,
-    rating: 4.9,
-    reviews: 520,
-    badges: ['Bestseller', 'Cheesy Bomb'],
-    desc: 'Crispy skin-on french fries topped with bubbly melted sharp cheddar, chopped smoked applewood bacon, caramelized onions & secret thousand sauce.',
-    sizes: [{ name: 'Loaded Basket', price: 0 }],
-    spiceLevels: ['Original'],
-    isSpicy: false,
-    addOns: [{ name: 'Extra Bacon Bits', price: 1.25 }]
+    basePrice: 139,
+    calories: 460,
+    prepTime: 4,
+    rating: 4.8,
+    reviews: 820,
+    badges: ['Bestseller', 'Movie Must-Have', 'Veg 🌿'],
+    desc: 'Hot golden crinkle-cut fries shaken in zesty spicy peri-peri seasoning in a bag, served with a tub of warm creamy cheese dip.',
+    sizes: [
+      { name: 'Regular Tub', price: 0 },
+      { name: 'Large Stadium Tub', price: 50 }
+    ],
+    spiceLevels: ['Mild Peri-Peri', 'Spicy Peri-Peri 🔥', 'Extra Fiery 🔥🔥'],
+    isSpicy: true,
+    addOns: [
+      { name: 'Extra Liquid Jalapeño Cheese Dip', price: 35 },
+      { name: 'Peri-Peri Spice Shaker Sachet', price: 15 }
+    ]
   },
   {
     id: 's2',
-    name: 'Truffle Parmesan Herb Fries',
+    name: 'Cocktail Samosas with Saunth (6 Pcs)',
     category: 'sides',
-    emoji: '🍟',
-    basePrice: 6.49,
-    calories: 540,
-    prepTime: 5,
-    rating: 4.8,
-    reviews: 290,
-    badges: ['Gourmet', 'Vegetarian 🌿'],
-    desc: 'Hand-cut russet fries tossed with fragrant white truffle oil, freshly shaved aged Parmesan cheese, sea salt crystals and fresh Italian parsley.',
-    sizes: [{ name: 'Regular Basket', price: 0 }],
-    spiceLevels: ['Savory'],
+    emoji: '🥟',
+    basePrice: 119,
+    calories: 390,
+    prepTime: 4,
+    rating: 4.9,
+    reviews: 910,
+    badges: ['All-Time Fav', 'Veg 🌿'],
+    desc: 'Crispy flaky bite-sized samosas stuffed with spiced green peas, cashew bits, and potatoes. Served with sweet tamarind and spicy mint chutneys.',
+    sizes: [
+      { name: '6 Cocktail Samosas', price: 0 },
+      { name: '12 Samosas Party Pack', price: 90 }
+    ],
+    spiceLevels: ['Classic Halwai Masala'],
     isSpicy: false,
-    addOns: [{ name: 'Truffle Aioli Dip', price: 0.95 }]
+    addOns: [{ name: 'Extra Dahi & Chutneys Cup', price: 25 }]
   },
   {
     id: 's3',
-    name: 'Stretchy Mozzarella Sticks (6 Pcs)',
+    name: 'Kurkure Paneer Popcorn with Dip',
     category: 'sides',
     emoji: '🧀',
-    basePrice: 6.25,
-    calories: 580,
+    basePrice: 169,
+    calories: 480,
     prepTime: 5,
-    rating: 4.7,
-    reviews: 230,
-    badges: ['Cheesy Stretch'],
-    desc: 'Golden Italian herb crumb coated whole milk mozzarella with epic stretch, served piping hot with marinara dipping sauce.',
-    sizes: [{ name: '6 Sticks', price: 0 }],
-    spiceLevels: ['Classic'],
+    rating: 4.8,
+    reviews: 430,
+    badges: ['Veg Crunch', 'Veg 🌿'],
+    desc: 'Bite-sized malai paneer cubes coated in a crunchy spiced cornflake crust and fried golden. Served with chili-garlic mayo.',
+    sizes: [{ name: 'Standard Tub', price: 0 }],
+    spiceLevels: ['Medium Chaat', 'Spicy Schezwan'],
     isSpicy: false,
-    addOns: [{ name: 'Extra Marinara', price: 0.60 }]
+    addOns: [{ name: 'Schezwan Mayo Dip', price: 25 }]
   },
 
-  // 🥤 DRINKS & SHAKES
+  // 🥤 CHAI, LASSI & COLD REFRESHMENTS
   {
     id: 'd1',
-    name: 'Thick Salted Caramel Pretzel Shake',
+    name: 'Kulhad Masala Chai (Hot Flask for 2)',
     category: 'drinks',
-    emoji: '🥤',
-    basePrice: 5.99,
-    calories: 610,
+    emoji: '☕',
+    basePrice: 99,
+    calories: 120,
     prepTime: 4,
-    rating: 4.9,
-    reviews: 380,
-    badges: ['Bestseller', 'Decadent'],
-    desc: 'Slow-churned vanilla bean custard blended with buttery salted caramel swirl, topped with whipped cream and salty crushed pretzel crumbs.',
-    sizes: [{ name: 'Regular 16oz', price: 0 }, { name: 'Giant 24oz', price: 1.75 }],
-    spiceLevels: ['Sweet'],
+    rating: 5.0,
+    reviews: 1240,
+    badges: ['Bestseller', 'Desi Emotion', 'Veg 🌿'],
+    desc: 'Steaming rich Assam tea brewed with crushed green cardamom, ginger, cloves, and whole milk. Served in terracotta style kulhads directly to your seat.',
+    sizes: [
+      { name: 'Flask for 2 Cups', price: 0 },
+      { name: 'Family Flask (4 Cups)', price: 70 }
+    ],
+    spiceLevels: ['Adrak Cardamom Sweet', 'Kadak Kam Cheeni (Less Sugar)'],
     isSpicy: false,
-    addOns: [{ name: 'Extra Whipped Cream', price: 0.50 }]
+    addOns: [{ name: 'Parle-G Biscuit Packet', price: 15 }]
   },
   {
     id: 'd2',
-    name: 'Cookies & Cream Oreo Blast Shake',
+    name: 'Thandi Kesar Pista Mango Lassi',
     category: 'drinks',
-    emoji: '🥤',
-    basePrice: 5.99,
-    calories: 640,
-    prepTime: 4,
+    emoji: '🥛',
+    basePrice: 129,
+    calories: 320,
+    prepTime: 3,
     rating: 4.9,
-    reviews: 410,
-    badges: ['Crowd Fav'],
-    desc: 'Creamy rich milkshake packed with real crushed chocolate Oreos, dark chocolate fudge drizzle and a whole Oreo cookie crown.',
-    sizes: [{ name: 'Regular 16oz', price: 0 }],
+    reviews: 650,
+    badges: ['Refreshing', 'Chilled', 'Veg 🌿'],
+    desc: 'Thick, creamy Punjabi sweet yogurt churned with real Alphonso mango pulp, Kashmiri saffron strands and garnished with slivered pistachios.',
+    sizes: [
+      { name: 'Tall Glass 350ml', price: 0 },
+      { name: 'Jumbo Mug 500ml', price: 40 }
+    ],
+    spiceLevels: ['Sweet Chilled'],
+    isSpicy: false,
+    addOns: [{ name: 'Extra Dry Fruits Topping', price: 25 }]
+  },
+  {
+    id: 'd3',
+    name: 'Masala Soda Shikanji (Fizzy & Tangy)',
+    category: 'drinks',
+    emoji: '🍋',
+    basePrice: 79,
+    calories: 80,
+    prepTime: 2,
+    rating: 4.8,
+    reviews: 490,
+    badges: ['Thirst Buster', 'Veg 🌿'],
+    desc: 'Crisp chilled sparkling soda infused with freshly squeezed lemon juice, black salt, roasted cumin, and mint leaves. The ultimate palate refresher!',
+    sizes: [{ name: '350ml Glass', price: 0 }],
+    spiceLevels: ['Tangy Khatta Meetha'],
+    isSpicy: false,
+    addOns: [{ name: 'Extra Lemon Shot', price: 10 }]
+  },
+  {
+    id: 'd4',
+    name: 'Thick KitKat Gems Chocolate Shake',
+    category: 'drinks',
+    emoji: '🍫',
+    basePrice: 149,
+    calories: 490,
+    prepTime: 3,
+    rating: 4.9,
+    reviews: 580,
+    badges: ['Kids Fav', 'Veg 🌿'],
+    desc: 'Rich chocolate milkshake blended with crunchy KitKat bars, chocolate syrup, topped with whipped cream and colorful crunchy Cadbury Gems.',
+    sizes: [{ name: 'Tall Cup 350ml', price: 0 }],
     spiceLevels: ['Sweet'],
+    isSpicy: false,
+    addOns: [{ name: 'Extra KitKat Finger', price: 20 }]
+  },
+
+  // 🍩 MITHAI & SWEET CRAVINGS
+  {
+    id: 'sw1',
+    name: 'Hot Gulab Jamun with Rabri (2 Pcs)',
+    category: 'desserts',
+    emoji: '🍮',
+    basePrice: 119,
+    calories: 380,
+    prepTime: 2,
+    rating: 5.0,
+    reviews: 860,
+    badges: ['Bestseller', 'Desi Sweet', 'Veg 🌿'],
+    desc: 'Two warm, soft melt-in-mouth mawa gulab jamuns soaked in saffron-rose sugar syrup, served with chilled thickened Malai Rabri on top.',
+    sizes: [
+      { name: '2 Gulab Jamun + Rabri', price: 0 },
+      { name: 'Family Box (4 Jamuns + Rabri)', price: 90 }
+    ],
+    spiceLevels: ['Warm & Sweet'],
+    isSpicy: false,
+    addOns: [{ name: 'Extra Malai Rabri Scoop', price: 35 }]
+  },
+  {
+    id: 'sw2',
+    name: 'Warm Brownie with Hot Chocolate Fudge',
+    category: 'desserts',
+    emoji: '🍫',
+    basePrice: 139,
+    calories: 450,
+    prepTime: 3,
+    rating: 4.8,
+    reviews: 430,
+    badges: ['Hot Fudge', 'Veg 🌿'],
+    desc: 'Fudgy walnut dark chocolate brownie warmed fresh and drenched in decadent hot chocolate sauce. Delivered piping hot to your seat.',
+    sizes: [{ name: 'Single Brownie Slice', price: 0 }],
+    spiceLevels: ['Rich Chocolate'],
+    isSpicy: false,
+    addOns: [{ name: 'Extra Hot Fudge Cup', price: 25 }]
+  },
+
+  // 🍱 VALUE COMBOS (DESI SEAT DROPS)
+  {
+    id: 'cb1',
+    name: 'The Movie Maza Combo',
+    category: 'combos',
+    emoji: '🎬',
+    basePrice: 299,
+    calories: 920,
+    prepTime: 8,
+    rating: 5.0,
+    reviews: 940,
+    badges: ['Bestseller Combo 🔥', 'Save ₹70', 'Veg 🌿'],
+    desc: 'Crispy Paneer Makhani Burger + Peri-Peri Crinkle Fries + Chilled Masala Shikanji Soda. Delivered together to your row!',
+    sizes: [{ name: 'Standard Combo', price: 0 }],
+    spiceLevels: ['Medium Chatpata'],
+    isSpicy: false,
+    addOns: [{ name: 'Add Gulab Jamun (1 pc)', price: 40 }]
+  },
+  {
+    id: 'cb2',
+    name: 'Chai & Samosa Evening Party (For 2)',
+    category: 'combos',
+    emoji: '☕',
+    basePrice: 249,
+    calories: 680,
+    prepTime: 6,
+    rating: 4.9,
+    reviews: 780,
+    badges: ['Desi Jodi 👥', 'Save ₹50', 'Veg 🌿'],
+    desc: 'Hot Kulhad Masala Chai (Flask for 2) + 6 Cocktail Samosas with sweet tamarind and mint chutneys + 2 Warm Gulab Jamuns.',
+    sizes: [{ name: 'Complete Jodi Pack', price: 0 }],
+    spiceLevels: ['Classic'],
     isSpicy: false,
     addOns: []
   },
   {
-    id: 'd3',
-    name: 'Fountain Soda (Free Seat Refills)',
-    category: 'drinks',
-    emoji: '🥤',
-    basePrice: 3.49,
-    calories: 180,
-    prepTime: 2,
-    rating: 4.7,
-    reviews: 650,
-    badges: ['Seat Refill 🔄'],
-    desc: 'Ice-cold fountain beverage: Coca-Cola, Sprite, Dr Pepper, Fanta Orange, or Diet Coke. Free refill brought straight to your seat!',
-    sizes: [{ name: 'Large 32oz', price: 0 }, { name: 'Cinema Tub 44oz', price: 1.00 }],
-    spiceLevels: ['Ice Cold'],
-    isSpicy: false,
-    addOns: [{ name: 'Flavor Shot: Vanilla', price: 0.50 }, { name: 'Flavor Shot: Cherry', price: 0.50 }]
-  },
-
-  // 🍩 SWEET TREATS
-  {
-    id: 'sw1',
-    name: 'Warm Cinnamon Sugar Churros (5 Pcs)',
-    category: 'desserts',
-    emoji: '🍩',
-    basePrice: 6.75,
-    calories: 520,
-    prepTime: 5,
-    rating: 4.9,
-    reviews: 310,
-    badges: ['Fresh & Hot', 'Bestseller'],
-    desc: 'Golden-fried Spanish churros rolled in fragrant cinnamon sugar crystals. Served with warm Dulce de Leche and dark chocolate dips.',
-    sizes: [{ name: '5 Churros', price: 0 }],
-    spiceLevels: ['Sweet'],
-    isSpicy: false,
-    addOns: [{ name: 'Extra Dulce de Leche', price: 0.90 }]
-  },
-
-  // 🍱 COMBOS
-  {
-    id: 'cb1',
-    name: 'The Ultimate Seat Drop Combo',
+    id: 'cb3',
+    name: 'Cricket Match Day Feast',
     category: 'combos',
-    emoji: '🍱',
-    basePrice: 15.99,
-    calories: 1480,
-    prepTime: 10,
-    rating: 5.0,
-    reviews: 680,
-    badges: ['Best Value 🔥', 'Save $4.50'],
-    desc: 'Double Smash Bacon Cheddar Burger + Crispy Seasoned Fries + Thick Gourmet Shake of your choice. Brought straight to your row!',
-    sizes: [{ name: 'Complete Combo Meal', price: 0 }],
-    spiceLevels: ['Mild', 'Medium Spice'],
-    isSpicy: false,
-    addOns: [{ name: 'Upgrade to Truffle Fries', price: 1.50 }]
-  },
-  {
-    id: 'cb2',
-    name: 'Movie Night Duo Feast (For 2)',
-    category: 'combos',
-    emoji: '🎬',
-    basePrice: 28.99,
-    calories: 2200,
-    prepTime: 15,
+    emoji: '🏏',
+    basePrice: 499,
+    calories: 1450,
+    prepTime: 12,
     rating: 4.9,
-    reviews: 340,
-    badges: ['For Two 👥', 'Save $8'],
-    desc: 'Pepperoni Detroit Pizza + 6-Pc Mega Crunch Tenders + Loaded Cheddar Animal Fries + 2 Large Fountain Sodas delivered together.',
-    sizes: [{ name: 'Duo Feast Box', price: 0 }],
-    spiceLevels: ['Classic'],
-    isSpicy: false,
+    reviews: 520,
+    badges: ['Party Platter 🎉', 'Save ₹120'],
+    desc: 'Tandoori Chicken Fiesta Pizza (8-inch) + 6 Masala Chicken Strips + Large Peri-Peri Fries + 2 Chilled Soft Drinks.',
+    sizes: [{ name: 'Platter for 2-3', price: 0 }],
+    spiceLevels: ['Spicy Masala 🔥'],
+    isSpicy: true,
     addOns: []
   }
 ];
 
 const CATEGORIES = [
-  { id: 'all', name: 'All Items', emoji: '✨' },
-  { id: 'burgers', name: 'Burgers', emoji: '🍔' },
-  { id: 'pizzas', name: 'Pizzas', emoji: '🍕' },
-  { id: 'chicken', name: 'Fried Chicken', emoji: '🍗' },
-  { id: 'tacos', name: 'Tacos & Nachos', emoji: '🌮' },
-  { id: 'sides', name: 'Loaded Sides', emoji: '🍟' },
-  { id: 'drinks', name: 'Drinks & Shakes', emoji: '🥤' },
-  { id: 'desserts', name: 'Sweet Treats', emoji: '🍩' },
+  { id: 'all', name: 'All Snacks', emoji: '✨' },
+  { id: 'chaat', name: 'Chaat & Street Food', emoji: '🥟' },
+  { id: 'burgers', name: 'Burgers & Rolls', emoji: '🍔' },
+  { id: 'pizzas', name: 'Desi Tadka Pizza', emoji: '🍕' },
+  { id: 'chicken', name: 'Tandoori & Fried', emoji: '🍗' },
+  { id: 'sides', name: 'Loaded Fries & Samosa', emoji: '🍟' },
+  { id: 'drinks', name: 'Chai, Lassi & Drinks', emoji: '☕' },
+  { id: 'desserts', name: 'Mithai & Desserts', emoji: '🍮' },
   { id: 'combos', name: 'Value Combos', emoji: '🍱' }
 ];
 
 const DEMO_PRESETS = [
-  { room: 'Cinema Hall 4 (IMAX)', row: 'Row F', seat: 'Seat 14' },
+  { room: 'PVR INOX Screen 4 (IMAX)', row: 'Row F', seat: 'Seat 14' },
   { room: 'Grand Auditorium A', row: 'Row 3 (Balcony)', seat: 'Seat 22' },
-  { room: 'VIP Stadium Lounge', row: 'Box 08', seat: 'Seat 4B' },
-  { room: 'Sports Bar & Arena', row: 'High Table 12', seat: 'Stool 3' },
-  { room: 'Conference Center B', row: 'Row 15', seat: 'Seat 8' }
+  { room: 'Wankhede VIP Stadium Lounge', row: 'Box 08', seat: 'Seat 4B' },
+  { room: 'Sports Arena Cafe', row: 'High Table 12', seat: 'Stool 3' },
+  { room: 'Convention Center (Hall B)', row: 'Row 15', seat: 'Seat 8' }
 ];
 
 // App Global State
 let currentSeat = {
-  room: 'Cinema Hall 4 (IMAX)',
+  room: 'PVR INOX Screen 4 (IMAX)',
   row: 'Row F',
   seat: 'Seat 14',
-  method: 'NFC' // 'NFC', 'QR', 'MANUAL'
+  method: 'NFC'
 };
 
 let currentCategory = 'all';
 let searchQuery = '';
 let cart = [];
 let appliedPromo = null;
-let selectedTip = 2.00;
+let selectedTip = 20; // In INR ₹20 tip
 let ordersHistory = [];
 let activeOrder = null;
 let orderTickerInterval = null;
@@ -464,7 +550,7 @@ let cameraStream = null;
 
 window.addEventListener('DOMContentLoaded', () => {
   loadStateFromLocalStorage();
-  parseUrlSeatParameters(); // Detect if page was opened by tapping an NFC tag or scanning a QR code!
+  parseUrlSeatParameters();
   renderCategoryTabs();
   renderFoodMenu();
   renderPresets();
@@ -474,7 +560,6 @@ window.addEventListener('DOMContentLoaded', () => {
   checkWebNfcSupport();
 });
 
-// Detects seat directly from URL query parameters (e.g. ?room=Cinema%20Hall%204&row=Row%20F&seat=Seat%2014)
 function parseUrlSeatParameters() {
   const params = new URLSearchParams(window.location.search);
   const room = params.get('room');
@@ -505,7 +590,6 @@ function loadStateFromLocalStorage() {
     const savedOrders = localStorage.getItem('seatbites_orders');
     if (savedOrders) ordersHistory = JSON.parse(savedOrders);
 
-    // If an active order is in progress
     if (ordersHistory.length > 0 && ordersHistory[0].statusIndex < 4) {
       activeOrder = ordersHistory[0];
       startOrderSimulation();
@@ -593,15 +677,15 @@ function renderFoodMenu() {
   });
 
   const catObj = CATEGORIES.find(c => c.id === currentCategory);
-  titleLabel.textContent = searchQuery ? `Search Results for "${searchQuery}"` : (catObj ? catObj.name : 'All Items');
-  countLabel.textContent = `${filtered.length} items`;
+  titleLabel.textContent = searchQuery ? `Search Results for "${searchQuery}"` : (catObj ? catObj.name : 'All Snacks');
+  countLabel.textContent = `${filtered.length} snacks`;
 
   if (filtered.length === 0) {
     grid.innerHTML = `
       <div style="grid-column: 1/-1; text-align: center; padding: 40px 20px; color: #888;">
         <span style="font-size: 48px; display: block; margin-bottom: 10px;">🔍</span>
-        <h3>No matching items found</h3>
-        <p>Try searching for burgers, pizza, wings, or change category.</p>
+        <h3>No matching snacks found</h3>
+        <p>Try searching for samosa, chaat, pav bhaji, pizza, or chai!</p>
       </div>
     `;
     return;
@@ -614,7 +698,7 @@ function renderFoodMenu() {
         <div class="food-meta">
           <div class="food-badges">
             ${item.badges.map(b => `
-              <span class="badge-tag ${b.includes('Veg') ? 'veg' : ''} ${b.includes('Spicy') ? 'spicy' : ''}">${b}</span>
+              <span class="badge-tag ${b.includes('Veg') ? 'veg' : ''} ${b.includes('Spicy') || b.includes('Mirch') || b.includes('Teekha') ? 'spicy' : ''}">${b}</span>
             `).join('')}
           </div>
           <h3 class="food-name">${item.name}</h3>
@@ -629,7 +713,7 @@ function renderFoodMenu() {
       </div>
       <p class="food-desc">${item.desc}</p>
       <div class="food-footer">
-        <span class="food-price">$${item.basePrice.toFixed(2)}</span>
+        <span class="food-price">₹${item.basePrice}</span>
         <button class="add-btn" onclick="event.stopPropagation(); openFoodModal('${item.id}')">
           <span>+ Add</span>
         </button>
@@ -646,7 +730,7 @@ function openFoodModal(itemId) {
 
   currentModalItem = item;
   modalSelectedSize = item.sizes[0];
-  modalSelectedSpice = item.spiceLevels[0] || 'Mild';
+  modalSelectedSpice = item.spiceLevels[0] || 'Medium';
   modalSelectedAddOns.clear();
   modalQty = 1;
   document.getElementById('modalKitchenNote').value = '';
@@ -667,7 +751,7 @@ function openFoodModal(itemId) {
     sizeList.innerHTML = item.sizes.map((s, idx) => `
       <div class="radio-card ${idx === 0 ? 'active' : ''}" onclick="selectModalSize(${idx}, this)">
         <span>${s.name}</span>
-        <span>${s.price > 0 ? `+$${s.price.toFixed(2)}` : 'Included'}</span>
+        <span>${s.price > 0 ? `+₹${s.price}` : 'Included'}</span>
       </div>
     `).join('');
   } else {
@@ -677,7 +761,7 @@ function openFoodModal(itemId) {
   // Render Spice
   const spiceGroup = document.getElementById('spiceGroup');
   const spiceList = document.getElementById('spiceOptionsList');
-  if (item.isSpicy && item.spiceLevels.length > 0) {
+  if (item.spiceLevels.length > 0) {
     spiceGroup.style.display = 'block';
     spiceList.innerHTML = item.spiceLevels.map((lvl, idx) => `
       <button class="spice-pill ${idx === 0 ? 'active' : ''}" onclick="selectModalSpice('${lvl}', this)">
@@ -696,7 +780,7 @@ function openFoodModal(itemId) {
     addOnsList.innerHTML = item.addOns.map((add, idx) => `
       <div class="checkbox-card" onclick="toggleModalAddOn(${idx}, this)">
         <span>${add.name}</span>
-        <span>+$${add.price.toFixed(2)}</span>
+        <span>+₹${add.price}</span>
       </div>
     `).join('');
   } else {
@@ -752,7 +836,7 @@ function calculateModalPrice() {
 
 function updateModalPrice() {
   const total = calculateModalPrice();
-  document.getElementById('modalTotalPrice').textContent = `$${total.toFixed(2)}`;
+  document.getElementById('modalTotalPrice').textContent = `₹${total}`;
 }
 
 function confirmAddToCart() {
@@ -775,7 +859,7 @@ function confirmAddToCart() {
   saveStateToLocalStorage();
   updateCartUi();
   closeFoodModal();
-  showToast(`Added ${modalQty}x ${currentModalItem.name} to order!`);
+  showToast(`Added ${modalQty}x ${currentModalItem.name} to seat order!`);
 }
 
 // ================= CART DRAWER & CHECKOUT =================
@@ -783,9 +867,9 @@ function confirmAddToCart() {
 function updateCartUi() {
   const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = cart.reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
-  const discount = appliedPromo ? (appliedPromo === 'SEAT50' ? Math.min(5.00, subtotal * 0.5) : 3.50) : 0;
-  const tax = subtotal * 0.0825;
-  const finalTotal = Math.max(0, subtotal + tax + selectedTip - discount);
+  const discount = appliedPromo ? (appliedPromo === 'SEAT50' ? Math.min(100, Math.round(subtotal * 0.5)) : 50) : 0;
+  const gst = Math.round(subtotal * 0.05); // 5% GST for restaurant/food
+  const finalTotal = Math.max(0, subtotal + gst + selectedTip - discount);
 
   // Navbar Badges
   document.getElementById('cartBadge').textContent = totalCount;
@@ -795,7 +879,7 @@ function updateCartUi() {
   if (totalCount > 0) {
     stickyBar.style.display = 'block';
     document.getElementById('stickyCartQty').textContent = `${totalCount} item${totalCount > 1 ? 's' : ''}`;
-    document.getElementById('stickyCartPrice').textContent = `$${finalTotal.toFixed(2)}`;
+    document.getElementById('stickyCartPrice').textContent = `₹${finalTotal}`;
     document.getElementById('stickyCartSeat').textContent = `To: ${currentSeat.row} • ${currentSeat.seat}`;
   } else {
     stickyBar.style.display = 'none';
@@ -807,8 +891,8 @@ function updateCartUi() {
     container.innerHTML = `
       <div style="text-align: center; padding: 40px 10px; color: #888;">
         <span style="font-size: 42px; display: block; margin-bottom: 8px;">🛍️</span>
-        <h4>Your seat order is empty</h4>
-        <p style="font-size: 13px; margin-top: 4px;">Select delicious items from the menu!</p>
+        <h4>Your seat snack tray is empty</h4>
+        <p style="font-size: 13px; margin-top: 4px;">Choose delicious chaat, rolls, samosas or chai!</p>
       </div>
     `;
   } else {
@@ -818,12 +902,12 @@ function updateCartUi() {
         <div class="cart-item-details">
           <div class="cart-item-name">${item.food.name}</div>
           <div class="cart-item-sub">
-            ${item.size.name !== 'Regular' ? item.size.name + ' • ' : ''}
-            ${item.food.isSpicy ? item.spice + ' • ' : ''}
+            ${item.size.name !== 'Regular' && !item.size.name.includes('Single') ? item.size.name + ' • ' : ''}
+            ${item.spice ? item.spice + ' • ' : ''}
             ${item.addOns.map(a => `+${a.name}`).join(', ')}
             ${item.note ? `Note: "${item.note}"` : ''}
           </div>
-          <div class="cart-item-price">$${(item.unitPrice * item.quantity).toFixed(2)}</div>
+          <div class="cart-item-price">₹${item.unitPrice * item.quantity}</div>
         </div>
         <div class="qty-counter">
           <button onclick="updateCartItemQty('${item.id}', -1)">-</button>
@@ -835,15 +919,15 @@ function updateCartUi() {
   }
 
   // Bill calculations
-  document.getElementById('billSubtotal').textContent = `$${subtotal.toFixed(2)}`;
-  document.getElementById('billTax').textContent = `$${tax.toFixed(2)}`;
-  document.getElementById('billTip').textContent = `$${selectedTip.toFixed(2)}`;
-  document.getElementById('billTotal').textContent = `$${finalTotal.toFixed(2)}`;
-  document.getElementById('checkoutPriceLabel').textContent = `$${finalTotal.toFixed(2)}`;
+  document.getElementById('billSubtotal').textContent = `₹${subtotal}`;
+  document.getElementById('billTax').textContent = `₹${gst}`;
+  document.getElementById('billTip').textContent = `₹${selectedTip}`;
+  document.getElementById('billTotal').textContent = `₹${finalTotal}`;
+  document.getElementById('checkoutPriceLabel').textContent = `₹${finalTotal}`;
 
   if (discount > 0) {
     document.getElementById('billDiscountRow').style.display = 'flex';
-    document.getElementById('billDiscount').textContent = `-$${discount.toFixed(2)}`;
+    document.getElementById('billDiscount').textContent = `-₹${discount}`;
   } else {
     document.getElementById('billDiscountRow').style.display = 'none';
   }
@@ -885,16 +969,16 @@ function selectTip(amount) {
 
 function applyPromoCode() {
   const val = document.getElementById('promoInput').value.trim().toUpperCase();
-  if (val === 'SEAT50' || val === 'FIRSTBITE' || val === 'FREEDROP') {
-    appliedPromo = val;
+  if (val === 'SEAT50' || val === 'FIRSTBITE' || val === 'DESI50') {
+    appliedPromo = 'SEAT50';
     document.getElementById('promoInputRow').style.display = 'none';
     const badge = document.getElementById('appliedPromoBadge');
     badge.style.display = 'flex';
-    badge.querySelector('span').innerHTML = `🎉 Promo <strong>${val}</strong> Applied!`;
+    badge.querySelector('span').innerHTML = `🎉 Promo <strong>${val}</strong> Applied (-₹100 Off)!`;
     updateCartUi();
     showToast(`Promo ${val} applied successfully!`);
   } else {
-    showToast('Invalid promo code. Try SEAT50 or FREEDROP');
+    showToast('Invalid promo code. Try SEAT50 or DESI50');
   }
 }
 
@@ -912,7 +996,7 @@ function placeOrder() {
     return;
   }
 
-  const orderId = `ORD-${Math.floor(10000 + Math.random() * 90000)}`;
+  const orderId = `IND-${Math.floor(10000 + Math.random() * 90000)}`;
   const pin = Math.floor(1000 + Math.random() * 9000);
   const payment = document.getElementById('paymentSelect').value;
 
@@ -925,7 +1009,7 @@ function placeOrder() {
     total: document.getElementById('billTotal').textContent,
     paymentMethod: payment,
     statusIndex: 0,
-    etaMinutes: 12
+    etaMinutes: 10
   };
 
   ordersHistory.unshift(newOrder);
@@ -944,11 +1028,11 @@ function placeOrder() {
 // ================= LIVE ORDER TRACKER =================
 
 const STATUS_STAGES = [
-  { title: 'Order Received', desc: 'Kitchen accepted your ticket', progress: 15, eta: 12 },
-  { title: 'Cooking & Grilling', desc: 'Chefs are grilling patties and frying fresh sides', progress: 45, eta: 8 },
-  { title: 'Quality Check & Packaging', desc: 'Temperature inspection & sealing food containers', progress: 70, eta: 4 },
-  { title: 'Runner En Route to Seat', desc: 'Runner Carlos is walking to your exact chair', progress: 90, eta: 2 },
-  { title: 'Delivered to Seat! 🍔', desc: 'Enjoy your hot meal directly at your seat', progress: 100, eta: 0 }
+  { title: 'Order Received in Kitchen', desc: 'Halwai & Chef accepted your ticket', progress: 15, eta: 10 },
+  { title: 'Frying & Assembling Fresh', desc: 'Tawa bhaji simmering & samosas frying crisp', progress: 45, eta: 7 },
+  { title: 'Quality & Temperature Check', desc: 'Kulhad tea insulated & sealed packaging', progress: 70, eta: 4 },
+  { title: 'Seat Runner En Route', desc: 'Runner Rahul is walking fast to your exact row', progress: 90, eta: 2 },
+  { title: 'Delivered to Seat! 🥟', desc: 'Enjoy your hot Desi snacks right at your chair', progress: 100, eta: 0 }
 ];
 
 function openTrackerModal() {
@@ -986,7 +1070,7 @@ function openTrackerModal() {
     ${activeOrder.items.map(i => `
       <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;">
         <span>${i.food.emoji} ${i.quantity}x ${i.food.name}</span>
-        <span>$${(i.unitPrice * i.quantity).toFixed(2)}</span>
+        <span>₹${i.unitPrice * i.quantity}</span>
       </div>
     `).join('')}
   `;
@@ -1023,7 +1107,7 @@ function startOrderSimulation() {
     } else {
       clearInterval(orderTickerInterval);
     }
-  }, 16000); // Advances step every 16 seconds automatically
+  }, 16000);
 }
 
 // ================= ORDER HISTORY MODAL =================
@@ -1035,7 +1119,7 @@ function openOrdersModal() {
       <div style="text-align: center; padding: 40px 10px; color: #888;">
         <span style="font-size: 42px; display: block; margin-bottom: 8px;">🧾</span>
         <h4>No orders yet</h4>
-        <p style="font-size: 13px;">Your seat deliveries will show up here.</p>
+        <p style="font-size: 13px;">Your seat snack orders will show up here.</p>
       </div>
     `;
   } else {
@@ -1051,7 +1135,7 @@ function openOrdersModal() {
           📍 ${ord.seat.room} • ${ord.seat.row} • ${ord.seat.seat}
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1px solid #E5E7EB; padding-top: 8px;">
-          <span style="font-weight: 800;">${ord.total} (${ord.items.length} items)</span>
+          <span style="font-weight: 800;">${ord.total} (${ord.items.length} snacks)</span>
           <button class="btn btn-small btn-primary" onclick="viewSpecificOrder(${idx})">
             ${ord.statusIndex === 4 ? 'Receipt' : 'Live Track'}
           </button>
@@ -1106,7 +1190,6 @@ function switchScanTab(tabName) {
   }
 }
 
-// Web NFC API Integration
 async function checkWebNfcSupport() {
   const statusEl = document.getElementById('nfcSupportText');
   const btn = document.getElementById('webNfcStartBtn');
@@ -1115,7 +1198,7 @@ async function checkWebNfcSupport() {
     statusEl.innerHTML = '<span style="color: #4ADE80;">✓ Native Web NFC detected on this device!</span>';
     btn.style.display = 'inline-flex';
   } else {
-    statusEl.innerHTML = 'Web NFC API available on Android Chrome (or tap any simulated tag below)';
+    statusEl.innerHTML = 'Web NFC API active on Android Chrome (or tap any simulated tag below)';
   }
 }
 
@@ -1171,7 +1254,6 @@ function renderPresets() {
   if (qrList) qrList.innerHTML = htmlQr;
 }
 
-// Camera QR Scanner
 async function toggleCameraScanner() {
   const video = document.getElementById('qrVideo');
   const btn = document.getElementById('startCamBtn');
@@ -1215,7 +1297,6 @@ function handleManualSeatSubmit(e) {
   setSeat(room, row, seat, 'Manual');
 }
 
-// Unified QR Tag & Web URL Generator
 function updateTagGenerator() {
   const room = document.getElementById('genRoomInput').value.trim() || currentSeat.room;
   const row = document.getElementById('genRowInput').value.trim() || currentSeat.row;
@@ -1265,8 +1346,6 @@ function parsePayloadAndSetSeat(payloadString, method) {
   } catch (e) {}
   setSeat('Main Area', 'Table 1', payloadString, method);
 }
-
-// ================= TOAST SYSTEM =================
 
 function showToast(message) {
   const container = document.getElementById('toastContainer');
